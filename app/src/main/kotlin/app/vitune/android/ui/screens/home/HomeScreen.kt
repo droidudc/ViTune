@@ -79,9 +79,7 @@ fun HomeScreen() {
                     item(1, stringResource(R.string.discover), R.drawable.globe)
                     item(2, stringResource(R.string.songs), R.drawable.musical_notes)
                     item(3, stringResource(R.string.playlists), R.drawable.playlist)
-                    item(4, stringResource(R.string.artists), R.drawable.person)
-                    item(5, stringResource(R.string.albums), R.drawable.disc)
-                    item(6, stringResource(R.string.local), R.drawable.download)
+                    item(4, stringResource(R.string.local), R.drawable.download)
                 }
             ) { currentTabIndex ->
                 saveableStateHolder.SaveableStateProvider(key = currentTabIndex) {
@@ -127,17 +125,11 @@ fun HomeScreen() {
                             onSearchClick = onSearchClick
                         )
 
-                        4 -> HomeArtistList(
-                            onArtistClick = { artistRoute(it.id) },
-                            onSearchClick = onSearchClick
-                        )
+                        
 
-                        5 -> HomeAlbums(
-                            onAlbumClick = { albumRoute(it.id) },
-                            onSearchClick = onSearchClick
-                        )
+                   
 
-                        6 -> HomeLocalSongs(
+                        4 -> HomeLocalSongs(
                             onSearchClick = onSearchClick
                         )
                     }
