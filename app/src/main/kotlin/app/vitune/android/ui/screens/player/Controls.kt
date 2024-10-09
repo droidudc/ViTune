@@ -187,7 +187,7 @@ private fun ClassicControls(
                             binder.player.play()
                         }
                     }
-                    .background(colorPalette.background2)
+                    .background(colorPalette.accent)
                     .size(64.dp)
             ) {
                 AnimatedPlayPauseButton(
