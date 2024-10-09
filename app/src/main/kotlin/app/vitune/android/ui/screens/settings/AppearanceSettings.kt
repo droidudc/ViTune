@@ -57,29 +57,7 @@ fun AppearanceSettings() = with(AppearancePreferences) {
                 )
             }
         }
-        SettingsGroup(title = stringResource(R.string.shapes)) {
-            EnumValueSelectorSettingsEntry(
-                title = stringResource(R.string.thumbnail_roundness),
-                selectedValue = thumbnailRoundness,
-                onValueSelect = { thumbnailRoundness = it },
-                trailingContent = {
-                    Spacer(
-                        modifier = Modifier
-                            .border(
-                                width = 1.dp,
-                                color = colorPalette.accent,
-                                shape = thumbnailRoundness.shape
-                            )
-                            .background(
-                                color = colorPalette.background1,
-                                shape = thumbnailRoundness.shape
-                            )
-                            .size(36.dp)
-                    )
-                },
-                valueText = { it.nameLocalized }
-            )
-        }
+        
         SettingsGroup(title = stringResource(R.string.text)) {
             if (isAtLeastAndroid13) SettingsEntry(
                 title = stringResource(R.string.language),
