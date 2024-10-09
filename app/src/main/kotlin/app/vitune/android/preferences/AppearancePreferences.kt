@@ -36,7 +36,7 @@ object AppearancePreferences : GlobalPreferencesHolder() {
     var applyFontPadding by boolean(false)
     val isShowingThumbnailInLockscreenProperty = boolean(true)
     var isShowingThumbnailInLockscreen by isShowingThumbnailInLockscreenProperty
-    var swipeToHideSong by boolean(false)
+    var swipeToHideSong by boolean(true)
     var swipeToHideSongConfirm by boolean(true)
     var maxThumbnailSize by int(1920)
     var hideExplicit by boolean(false)
