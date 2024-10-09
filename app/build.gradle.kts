@@ -65,7 +65,6 @@ android {
             applicationIdSuffix = ".nightly"
             versionNameSuffix = "-NIGHTLY"
             manifestPlaceholders["appName"] = "ViTune Nightly"
-            signingConfig = signingConfigs.findByName("ci")
         }
     }
 
