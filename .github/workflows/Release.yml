@@ -24,7 +24,7 @@ jobs:
 
       - name: Build APK with Gradle
         
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleRelease
 
       - name: Upload Nightly APK
         uses: actions/upload-artifact@v4
