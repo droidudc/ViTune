@@ -58,47 +58,7 @@ fun AppearanceSettings() = with(AppearancePreferences) {
             }
         }
         
-        SettingsGroup(title = stringResource(R.string.text)) {
-            if (isAtLeastAndroid13) SettingsEntry(
-                title = stringResource(R.string.language),
-                text = currentLocale()?.displayLanguage
-                    ?: stringResource(R.string.color_source_default),
-                onClick = {
-                    context.findActivity().startLanguagePicker()
-                }
-            )
-
-            if (googleFontsAvailable()) EnumValueSelectorSettingsEntry(
-                title = stringResource(R.string.font),
-                selectedValue = fontFamily,
-                onValueSelect = { fontFamily = it },
-                valueText = {
-                    if (it == BuiltInFontFamily.System) stringResource(R.string.use_system_font) else it.name
-                }
-            ) else SwitchSettingsEntry(
-                title = stringResource(R.string.use_system_font),
-                text = stringResource(R.string.use_system_font_description),
-                isChecked = fontFamily == BuiltInFontFamily.System,
-                onCheckedChange = {
-                    fontFamily = if (it) BuiltInFontFamily.System else BuiltInFontFamily.Poppins
-                }
-            )
-
-            SwitchSettingsEntry(
-                title = stringResource(R.string.apply_font_padding),
-                text = stringResource(R.string.apply_font_padding_description),
-                isChecked = applyFontPadding,
-                onCheckedChange = { applyFontPadding = it }
-            )
-        }
-        if (!isAtLeastAndroid13) SettingsGroup(title = stringResource(R.string.lockscreen)) {
-            SwitchSettingsEntry(
-                title = stringResource(R.string.show_song_cover),
-                text = stringResource(R.string.show_song_cover_description),
-                isChecked = isShowingThumbnailInLockscreen,
-                onCheckedChange = { isShowingThumbnailInLockscreen = it }
-            )
-        }
+        
         SettingsGroup(title = stringResource(R.string.player)) {
             SwitchSettingsEntry(
                 title = stringResource(R.string.previous_button_while_collapsed),
@@ -114,43 +74,7 @@ fun AppearanceSettings() = with(AppearancePreferences) {
                 onCheckedChange = { PlayerPreferences.horizontalSwipeToClose = it }
             )
 
-            EnumValueSelectorSettingsEntry(
-                title = stringResource(R.string.player_layout),
-                selectedValue = PlayerPreferences.playerLayout,
-                onValueSelect = { PlayerPreferences.playerLayout = it },
-                valueText = { it.displayName() }
-            )
-
-            AnimatedVisibility(
-                visible = PlayerPreferences.playerLayout == PlayerPreferences.PlayerLayout.New,
-                label = ""
-            ) {
-                SwitchSettingsEntry(
-                    title = stringResource(R.string.show_like_button),
-                    text = stringResource(R.string.show_like_button_description),
-                    isChecked = PlayerPreferences.showLike,
-                    onCheckedChange = { PlayerPreferences.showLike = it }
-                )
-            }
-
-            EnumValueSelectorSettingsEntry(
-                title = stringResource(R.string.seek_bar_style),
-                selectedValue = PlayerPreferences.seekBarStyle,
-                onValueSelect = { PlayerPreferences.seekBarStyle = it },
-                valueText = { it.displayName() }
-            )
-
-            AnimatedVisibility(
-                visible = PlayerPreferences.seekBarStyle == PlayerPreferences.SeekBarStyle.Wavy,
-                label = ""
-            ) {
-                EnumValueSelectorSettingsEntry(
-                    title = stringResource(R.string.seek_bar_quality),
-                    selectedValue = PlayerPreferences.wavySeekBarQuality,
-                    onValueSelect = { PlayerPreferences.wavySeekBarQuality = it },
-                    valueText = { it.displayName() }
-                )
-            }
+            
 
             SwitchSettingsEntry(
                 title = stringResource(R.string.swipe_to_remove_item),
