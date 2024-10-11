@@ -410,6 +410,8 @@
     <string name="reverb_medium_hall">Medium hall</string>
     <string name="reverb_large_hall">Large hall</string>
     <string name="reverb_plate">Plate</string>
+    <string name="fl_title">Flowtune</string>
+    <string name="fl_recent">Recently Played</string>
 
     <plurals name="format_reset_blacklist_description">
         <item quantity="one">Remove %1$s song from the blacklist</item>
