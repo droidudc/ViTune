@@ -167,7 +167,7 @@ fun QuickPicks(
                 )
         ) {
             Header(
-                title = stringResource(R.string.quick_picks),
+                title = stringResource(R.string.fl_title),
                 modifier = Modifier.padding(endPaddingValues)
             )
 
