@@ -242,20 +242,7 @@ fun OtherSettings() {
                 Spacer(modifier = Modifier.height(12.dp))
 
                 
-            } else SecondaryTextButton(
-                text = stringResource(R.string.show_troubleshoot_section),
-                onClick = {
-                    coroutineScope.launch {
-                        delay(500)
-                        scrollState.smoothScrollToBottom()
-                    }
-                    showTroubleshoot = true
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, bottom = 16.dp)
-                    .padding(horizontal = 16.dp)
-            )
+            
         }
     }
 }
