@@ -150,7 +150,16 @@ fun OtherSettings() {
                 onCheckedChange = { DataPreferences.autoSyncPlaylists = it }
             )
         }
-        
+        SettingsGroup(title = stringResource(R.string.built_in_playlists)) {
+            IntSettingsEntry(
+                title = stringResource(R.string.top_list_length),
+                text = stringResource(R.string.top_list_length_description),
+                currentValue = DataPreferences.topListLength,
+                setValue = { DataPreferences.topListLength = it },
+                defaultValue = 10,
+                range = 1..500
+            )
+        }
         SettingsGroup(title = stringResource(R.string.quick_picks)) {
             EnumValueSelectorSettingsEntry(
                 title = stringResource(R.string.quick_picks_source),
@@ -166,8 +175,31 @@ fun OtherSettings() {
                 onCheckedChange = { DataPreferences.shouldCacheQuickPicks = it }
             )
         }
-
-        
+        SettingsGroup(title = stringResource(R.string.dynamic_thumbnails)) {
+            var selectingThumbnailSize by remember { mutableStateOf(false) }
+            SettingsEntry(
+                title = stringResource(R.string.max_dynamic_thumbnail_size),
+                text = stringResource(R.string.max_dynamic_thumbnail_size_description),
+                onClick = { selectingThumbnailSize = true }
+            )
+            if (selectingThumbnailSize) SliderDialog(
+                onDismiss = { selectingThumbnailSize = false },
+                title = stringResource(R.string.max_dynamic_thumbnail_size)
+            ) {
+                SliderDialogBody(
+                    provideState = {
+                        remember(AppearancePreferences.maxThumbnailSize) {
+                            mutableFloatStateOf(AppearancePreferences.maxThumbnailSize.toFloat())
+                        }
+                    },
+                    onSlideComplete = { AppearancePreferences.maxThumbnailSize = it.roundToInt() },
+                    min = 32f,
+                    max = 1920f,
+                    toDisplay = { stringResource(R.string.format_px, it.roundToInt()) },
+                    steps = 58
+                )
+            }
+        }
         SettingsGroup(title = stringResource(R.string.service_lifetime)) {
             AnimatedVisibility(visible = !isIgnoringBatteryOptimizations) {
                 SettingsDescription(
@@ -213,6 +245,94 @@ fun OtherSettings() {
                 )
             }
 
-            
+            SettingsEntry(
+                title = stringResource(R.string.need_help),
+                text = stringResource(R.string.need_help_description),
+                onClick = {
+                    uriHandler.openUri("https://dontkillmyapp.com/")
+                }
+            )
 
-            
+            SettingsDescription(text = stringResource(R.string.service_lifetime_report_issue))
+        }
+
+        var showTroubleshoot by rememberSaveable { mutableStateOf(false) }
+
+        AnimatedContent(showTroubleshoot, label = "") { show ->
+            if (show) SettingsGroup(
+                title = stringResource(R.string.troubleshooting),
+                description = stringResource(R.string.troubleshooting_warning),
+                important = true
+            ) {
+                val troubleshootScope = rememberCoroutineScope()
+                var reloading by rememberSaveable { mutableStateOf(false) }
+
+                SecondaryTextButton(
+                    text = stringResource(R.string.reload_app_internals),
+                    onClick = {
+                        if (!reloading) troubleshootScope.launch {
+                            reloading = true
+                            context.stopService(context.intent<PrecacheService>())
+                            binder?.restartForegroundOrStop()
+                            DatabaseInitializer.reload()
+                            reloading = false
+                        }
+                    },
+                    enabled = !reloading,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp)
+                        .padding(horizontal = 16.dp)
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                SecondaryTextButton(
+                    text = stringResource(R.string.kill_app),
+                    onClick = {
+                        binder?.stopRadio()
+                        binder?.invincible = false
+                        context.findActivity().finishAndRemoveTask()
+                        binder?.restartForegroundOrStop()
+                        troubleshootScope.launch {
+                            delay(500L)
+                            Handler(Looper.getMainLooper()).postAtFrontOfQueue { exitProcess(0) }
+                        }
+                    },
+                    enabled = !reloading,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp)
+                        .padding(horizontal = 16.dp)
+                )
+
+                Spacer(modifier = Modifier.height(12.dp))
+
+                SecondaryTextButton(
+                    text = stringResource(R.string.show_logs),
+                    onClick = {
+                        logsRoute.global()
+                    },
+                    enabled = !reloading,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp)
+                        .padding(horizontal = 16.dp)
+                )
+            } else SecondaryTextButton(
+                text = stringResource(R.string.show_troubleshoot_section),
+                onClick = {
+                    coroutineScope.launch {
+                        delay(500)
+                        scrollState.smoothScrollToBottom()
+                    }
+                    showTroubleshoot = true
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, bottom = 16.dp)
+                    .padding(horizontal = 16.dp)
+            )
+        }
+    }
+}
