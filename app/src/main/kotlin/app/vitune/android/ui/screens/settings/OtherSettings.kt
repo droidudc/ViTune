@@ -150,16 +150,7 @@ fun OtherSettings() {
                 onCheckedChange = { DataPreferences.autoSyncPlaylists = it }
             )
         }
-        SettingsGroup(title = stringResource(R.string.built_in_playlists)) {
-            IntSettingsEntry(
-                title = stringResource(R.string.top_list_length),
-                text = stringResource(R.string.top_list_length_description),
-                currentValue = DataPreferences.topListLength,
-                setValue = { DataPreferences.topListLength = it },
-                defaultValue = 10,
-                range = 1..500
-            )
-        }
+        
         SettingsGroup(title = stringResource(R.string.quick_picks)) {
             EnumValueSelectorSettingsEntry(
                 title = stringResource(R.string.quick_picks_source),
@@ -175,31 +166,7 @@ fun OtherSettings() {
                 onCheckedChange = { DataPreferences.shouldCacheQuickPicks = it }
             )
         }
-        SettingsGroup(title = stringResource(R.string.dynamic_thumbnails)) {
-            var selectingThumbnailSize by remember { mutableStateOf(false) }
-            SettingsEntry(
-                title = stringResource(R.string.max_dynamic_thumbnail_size),
-                text = stringResource(R.string.max_dynamic_thumbnail_size_description),
-                onClick = { selectingThumbnailSize = true }
-            )
-            if (selectingThumbnailSize) SliderDialog(
-                onDismiss = { selectingThumbnailSize = false },
-                title = stringResource(R.string.max_dynamic_thumbnail_size)
-            ) {
-                SliderDialogBody(
-                    provideState = {
-                        remember(AppearancePreferences.maxThumbnailSize) {
-                            mutableFloatStateOf(AppearancePreferences.maxThumbnailSize.toFloat())
-                        }
-                    },
-                    onSlideComplete = { AppearancePreferences.maxThumbnailSize = it.roundToInt() },
-                    min = 32f,
-                    max = 1920f,
-                    toDisplay = { stringResource(R.string.format_px, it.roundToInt()) },
-                    steps = 58
-                )
-            }
-        }
+        
         SettingsGroup(title = stringResource(R.string.service_lifetime)) {
             AnimatedVisibility(visible = !isIgnoringBatteryOptimizations) {
                 SettingsDescription(
