@@ -34,7 +34,7 @@
     <string name="library">Library</string>
     <string name="discover">Discover</string>
     <string name="local">Local</string>
-    <string name="quick_picks">Flowtune</string>
+    <string name="quick_picks">Quick Picks</string>
     <string name="mood">Mood</string>
     <string name="online">Online</string>
     <string name="videos">Videos</string>
@@ -128,7 +128,7 @@
     <string name="error_pre_cache">An unknown error occurred during pre-caching. Please try again.</string>
     <string name="error_url">Can\'t open url %1$s</string>
 
-    <string name="media_permission_declined">Permission declined, please grant media permissions in the settings of your device.</string>
+    <string name="media_permission_declined">Permission declined, please grant Flowtune media permissions in the settings of your device.</string>
     <string name="open_settings">Open settings</string>
     <string name="no_items_found">No items found</string>
     <string name="no_search_results">No results found. Please try a different query or category</string>
@@ -177,7 +177,7 @@
     <string name="view_album">View album</string>
     <string name="view_playlist">View playlist</string>
 
-    <string name="search_placeholder">Enter a name</string>
+    <string name="search_placeholder">Search on Flowtune</string>
     <string name="format_version_credits">by abhiram-76</string>
     <string name="social">Social</string>
     <string name="contact">Contact</string>
@@ -260,10 +260,10 @@
     <string name="format_pause_playback_time_description">Stops playback time from being saved. This pauses the statistics in the \'My Top %1$s\' playlist!</string>
 
     <string name="backup">Backup</string>
-    <string name="backup_description">Personal preferences (i.e. the theme mode) and the cache are excluded.</string>
+    <string name="backup_description">Personal preferences (cache are excluded).</string>
     <string name="backup_action_description">Export the database to the external storage</string>
     <string name="restore">Restore</string>
-    <string name="restore_warning">Existing data will be overwritten.\nViTune will automatically close itself after restoring the database.</string>
+    <string name="restore_warning">Existing data will be overwritten.\nFlowtune will automatically close itself after restoring the database.</string>
     <string name="restore_description">Import the database from the external storage</string>
 
     <string name="other">Other</string>
@@ -282,25 +282,25 @@
     <string name="top_list_length">Top list length</string>
     <string name="top_list_length_description">Limits the length of the \'My top x\' playlist</string>
 
-    <string name="service_lifetime">Service lifetime</string>
+    <string name="service_lifetime">Battery settings</string>
     <string name="service_lifetime_warning">If battery optimizations are applied, the playback notification can suddenly disappear when paused.</string>
     <string name="service_lifetime_warning_android_12">Since Android 12, disabling battery optimizations is required for the invincible service option to be available.</string>
     <string name="ignore_battery_optimizations">Ignore battery optimizations</string>
     <string name="ignoring_battery_optimizations">Restriction already lifted</string>
     <string name="ignore_battery_optimizations_action">Disable background restrictions</string>
     <string name="invincible_service">Invincible service</string>
-    <string name="invincible_service_description">Should keep the playback going 99.99% of the time, in case turning off the battery optimizations is not enough</string>
+    <string name="invincible_service_description">continue playback to avoid killing Flowtune by Device Battery Saver</string>
 
-    <string name="need_help">Need help?</string>
-    <string name="need_help_description">Most of the time, it is not the developer\'s fault (even after turning on invincible service) that the app stops working properly in the background.\nCheck if your device manufacturer kills your apps (click to redirect)</string>
-    <string name="service_lifetime_report_issue">If you really think there is something wrong with the app itself, hop on to the About tab</string>
-    <string name="troubleshooting">Troubleshooting</string>
-    <string name="troubleshooting_warning">Caution: use these buttons as a last resort when audio playback fails</string>
+    <string name="need_help">Support Developer</string>
+    <string name="need_help_description">Encourage Developer's work , even small contributions are appreciated</string>
+    <string name="service_lifetime_report_issue"></string>
+    <string name="troubleshooting">Visit the Flowtune repo to get how to disable battery optimisation</string>
+    <string name="troubleshooting_warning">Visit: github.com/abhiram-76/flowtune/</string>
     <string name="reload_app_internals">Reload app internals</string>
     <string name="kill_app">Kill app</string>
     <string name="show_logs">View debug logs</string>
     <string name="logs">Logs</string>
-    <string name="show_troubleshoot_section">Show troubleshoot section</string>
+    <string name="show_troubleshoot_section">still App got killed!</string>
 
     <string name="persistent_queue">Persistent queue</string>
     <string name="persistent_queue_description">Save and restore playing songs</string>
@@ -389,7 +389,7 @@
     <string name="error_github">An unknown error occurred while fetching data from GitHub</string>
     <string name="new_version_available">A new version is available</string>
     <string name="more_information">More information</string>
-    <string name="up_to_date">You\'re currently up-to-date: no updates available</string>
+    <string name="up_to_date">Flowtune is currently up-to-date: check again later</string>
 
     <string name="dynamic_thumbnails">Dynamic thumbnails</string>
     <string name="max_dynamic_thumbnail_size">Max dynamic thumbnail size</string>
