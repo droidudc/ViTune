@@ -234,58 +234,14 @@ fun OtherSettings() {
                 val troubleshootScope = rememberCoroutineScope()
                 var reloading by rememberSaveable { mutableStateOf(false) }
 
-                SecondaryTextButton(
-                    text = stringResource(R.string.reload_app_internals),
-                    onClick = {
-                        if (!reloading) troubleshootScope.launch {
-                            reloading = true
-                            context.stopService(context.intent<PrecacheService>())
-                            binder?.restartForegroundOrStop()
-                            DatabaseInitializer.reload()
-                            reloading = false
-                        }
-                    },
-                    enabled = !reloading,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp)
-                        .padding(horizontal = 16.dp)
-                )
+                
+                Spacer(modifier = Modifier.height(12.dp))
+
+
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                SecondaryTextButton(
-                    text = stringResource(R.string.kill_app),
-                    onClick = {
-                        binder?.stopRadio()
-                        binder?.invincible = false
-                        context.findActivity().finishAndRemoveTask()
-                        binder?.restartForegroundOrStop()
-                        troubleshootScope.launch {
-                            delay(500L)
-                            Handler(Looper.getMainLooper()).postAtFrontOfQueue { exitProcess(0) }
-                        }
-                    },
-                    enabled = !reloading,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp)
-                        .padding(horizontal = 16.dp)
-                )
-
-                Spacer(modifier = Modifier.height(12.dp))
-
-                SecondaryTextButton(
-                    text = stringResource(R.string.show_logs),
-                    onClick = {
-                        logsRoute.global()
-                    },
-                    enabled = !reloading,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(start = 16.dp)
-                        .padding(horizontal = 16.dp)
-                )
+                
             } else SecondaryTextButton(
                 text = stringResource(R.string.show_troubleshoot_section),
                 onClick = {
