@@ -167,7 +167,7 @@ private suspend fun Version.getNewerVersion(
 @Route
 @Composable
 fun About() = SettingsCategoryScreen(
-    title = stringResource(R.string.about),
+    title = stringResource(R.string.fl_title),
     description = stringResource(
         R.string.format_version_credits,
         VERSION_NAME
