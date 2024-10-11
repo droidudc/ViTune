@@ -104,7 +104,7 @@ fun HomeSongs(
         setSortBy = { songSortBy = it },
         sortOrder = songSortOrder,
         setSortOrder = { songSortOrder = it },
-        title = stringResource(R.string.songs)
+        title = stringResource(R.string.fl_recent)
     )
 }
 
