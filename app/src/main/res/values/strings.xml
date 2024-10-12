@@ -32,7 +32,7 @@
     <string name="history">History</string>
     <string name="overview">Overview</string>
     <string name="library">Library</string>
-    <string name="discover">Discover</string>
+    <string name="discover">Explore</string>
     <string name="local">Local</string>
     <string name="quick_picks">Quick picks</string>
     <string name="mood">Mood</string>
@@ -114,13 +114,13 @@
     <string name="artist_has_no_albums">This artist hasn\'t released an album yet</string>
     <string name="artist_has_no_singles">This artist hasn\'t released a single yet</string>
 
-    <string name="error_message">An error has occurred</string>
+    <string name="error_message">Network Error</string>
     <string name="error_local_music_deleted">This local music file does not exist anymore</string>
     <string name="error_network">A network error has occurred</string>
     <string name="error_unplayable">Couldn\'t find a playable audio format</string>
     <string name="error_source_deleted">The original video source of this song has been deleted</string>
     <string name="error_server_restrictions">This song cannot be played due to server restrictions</string>
-    <string name="error_id_mismatch">The returned video ID doesn\'t match the requested one</string>
+    <string name="error_id_mismatch">Something went wrong, try again </string>
     <string name="error_unknown_playback">An unknown playback error has occurred</string>
     <string name="error_piped_link">There was an unknown error linking your Piped account. Please try again.</string>
     <string name="error_piped_instances_unavailable">Piped instance list currently unavailable</string>
@@ -178,13 +178,13 @@
     <string name="view_playlist">View playlist</string>
 
     <string name="search_placeholder">Enter a name</string>
-    <string name="format_version_credits">v%1$s by Huizengek &amp; vfsfitvnm</string>
-    <string name="social">Social</string>
+    <string name="format_version_credits">v%1$s by abhiram-76</string>
+    <string name="social">Source</string>
     <string name="contact">Contact</string>
-    <string name="github">GitHub</string>
-    <string name="view_source">View the source code</string>
+    <string name="github">View Source</string>
+    <string name="view_source">Flowtune is based on Vimusic by vfsfitvnm</string>
     <string name="report_bug">Report an issue</string>
-    <string name="report_bug_description">If you need help with a bug you can file an issue on GitHub (click to redirect)</string>
+    <string name="report_bug_description">If you need help with a bug you can file an issue on GitHub</string>
     <string name="request_feature">Request a feature or suggest an idea</string>
     <string name="redirect_github">You will be redirected to GitHub</string>
 
@@ -196,7 +196,7 @@
     <string name="darkness">Darkness</string>
     <string name="darkness_normal">Normal</string>
     <string name="darkness_pureblack">PureBlack</string>
-    <string name="darkness_amoled">AMOLED</string>
+    <string name="darkness_amoled">Black</string>
 
     <string name="color_mode">Mode</string>
     <string name="color_mode_light">Light</string>
@@ -260,10 +260,10 @@
     <string name="format_pause_playback_time_description">Stops playback time from being saved. This pauses the statistics in the \'My Top %1$s\' playlist!</string>
 
     <string name="backup">Backup</string>
-    <string name="backup_description">Personal preferences (i.e. the theme mode) and the cache are excluded.</string>
+    <string name="backup_description">Personal preferences (cache are excluded)</string>
     <string name="backup_action_description">Export the database to the external storage</string>
     <string name="restore">Restore</string>
-    <string name="restore_warning">Existing data will be overwritten.\nViTune will automatically close itself after restoring the database.</string>
+    <string name="restore_warning">Existing data will be overwritten.\nFlowtune will automatically close itself after restoring the database.</string>
     <string name="restore_description">Import the database from the external storage</string>
 
     <string name="other">Other</string>
