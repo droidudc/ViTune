@@ -44,6 +44,8 @@ android {
         debug {
             applicationIdSuffix = ".flowtune"
             versionNameSuffix = "-DEBUG"
+            isMinifyEnabled = true
+            isShrinkResources = true
             manifestPlaceholders["appName"] = "Flowtune"
         }
 
