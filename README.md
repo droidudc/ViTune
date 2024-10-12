@@ -7,7 +7,7 @@
 ---
 
 <p align="center">
-  <img src="" width="30%" />
+  <img src=./assets/Screenshot_20241012-100749_Flowtune.png"" width="30%" />
   <img src="" width="30%" />
   <img src="" width="30%" />
 
