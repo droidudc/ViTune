@@ -227,8 +227,8 @@ fun OtherSettings() {
 
         AnimatedContent(showTroubleshoot, label = "") { show ->
             if (show) SettingsGroup(
-                title = stringResource(R.string.troubleshooting),
-                description = stringResource(R.string.troubleshooting_warning),
+                title = stringResource(R.string.troubleshootin),
+                description = stringResource(R.string.troubleshooting_warnin),
                 important = true
             ) {
                 val troubleshootScope = rememberCoroutineScope()
@@ -243,13 +243,13 @@ fun OtherSettings() {
 
                 
             } else SecondaryTextButton(
-                text = stringResource(R.string.show_troubleshoot_section),
+                text = stringResource(R.string.show_troubleshoot_sectio),
                 onClick = {
                     coroutineScope.launch {
                         delay(500)
                         scrollState.smoothScrollToBottom()
                     }
-                    showTroubleshoot = true
+                    showTroubleshoot = false
                 },
                 modifier = Modifier
                     .fillMaxWidth()
