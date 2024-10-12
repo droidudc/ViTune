@@ -167,7 +167,7 @@ private suspend fun Version.getNewerVersion(
 @Route
 @Composable
 fun About() = SettingsCategoryScreen(
-    title = stringResource(R.string.fl_title),
+    title = stringResource(R.string.about),
     description = stringResource(
         R.string.format_version_credits,
         VERSION_NAME
@@ -232,7 +232,38 @@ fun About() = SettingsCategoryScreen(
             onClick = { newVersionDialogOpened = true }
         )
 
-        
+        EnumValueSelectorSettingsEntry(
+            title = stringResource(R.string.version_check),
+            selectedValue = DataPreferences.versionCheckPeriod,
+            onValueSelect = onSelect@{
+                DataPreferences.versionCheckPeriod = it
+                if (isAtLeastAndroid13 && it.period != null && !hasPermission)
+                    launcher.launch(permission)
+
+                VersionCheckWorker.upsert(context.applicationContext, it.period)
+            },
+            valueText = { it.displayName() }
+        )
+    }
+
+    if (newVersionDialogOpened) DefaultDialog(
+        onDismiss = { newVersionDialogOpened = false }
+    ) {
+        var newerVersion: Result<Release?>? by remember { mutableStateOf(null) }
+
+        LaunchedEffect(Unit) {
+            withContext(Dispatchers.IO) {
+                newerVersion = VERSION_NAME.version
+                    .getNewerVersion()
+                    ?.onFailure(Throwable::printStackTrace)
+            }
+        }
+
+        newerVersion?.getOrNull()?.let {
+            BasicText(
+                text = stringResource(R.string.new_version_available),
+                style = typography.xs.semiBold.center
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
