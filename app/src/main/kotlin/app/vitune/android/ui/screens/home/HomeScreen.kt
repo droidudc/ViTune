@@ -40,100 +40,74 @@ private val moreAlbumsRoute = Route0("moreAlbumsRoute")
 
 @Route
 @Composable
-fun HomeScreen() {
-    val saveableStateHolder = rememberSaveableStateHolder()
+fun HomeScreen(
+    navController: NavController,
+    screenIndex: Int
+) {
+    val screens = listOf(
+        Screen.Home,
+        Screen.Songs,
+        Screen.Artists,
+        Screen.Albums,
+        Screen.Playlists
+    )
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    PersistMapCleanup("home/")
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(id = screens[screenIndex].resourceId))
+                },
+                actions = {
+                    TooltipIconButton(
+                        description = R.string.search,
+                        onClick = { navController.navigate(route = "search") },
+                        icon = Icons.Outlined.Search,
+                        inTopBar = true
+                    )
 
-    RouteHandler {
-        GlobalRoutes()
-
-        localPlaylistRoute { playlistId ->
-            LocalPlaylistScreen(playlistId = playlistId)
+                    TooltipIconButton(
+                        description = R.string.settings,
+                        onClick = { navController.navigate(route = "settings") },
+                        icon = Icons.Outlined.Settings,
+                        inTopBar = true
+                    )
+                },
+                scrollBehavior = scrollBehavior
+            )
         }
+    ) { paddingValues ->
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = paddingValues.calculateTopPadding())
+        ) {
+            when (screenIndex) {
+                0 -> QuickPicks(
+                    onAlbumClick = { browseId -> navController.navigate(route = "album/$browseId") },
+                    onArtistClick = { browseId -> navController.navigate(route = "artist/$browseId") },
+                    onPlaylistClick = { browseId -> navController.navigate(route = "playlist/$browseId") }
+                )
 
-        builtInPlaylistRoute { builtInPlaylist ->
-            BuiltInPlaylistScreen(builtInPlaylist = builtInPlaylist)
-        }
+                1 -> HomeSongs(
+                    onGoToAlbum = { browseId -> navController.navigate(route = "album/$browseId") },
+                    onGoToArtist = { browseId -> navController.navigate(route = "artist/$browseId") }
+                )
 
-        moodRoute { mood ->
-            MoodScreen(mood = mood)
-        }
+                2 -> HomeArtistList(
+                    onArtistClick = { artist -> navController.navigate(route = "artist/${artist.id}") }
+                )
 
-        moreMoodsRoute {
-            MoreMoodsScreen()
-        }
+                3 -> HomeAlbums(
+                    onAlbumClick = { album -> navController.navigate(route = "album/${album.id}") }
+                )
 
-        moreAlbumsRoute {
-            MoreAlbumsScreen()
-        }
-
-        Content {
-            Scaffold(
-                topIconButtonId = R.drawable.settings,
-                onTopIconButtonClick = { settingsRoute() },
-                tabIndex = UIStatePreferences.homeScreenTabIndex,
-                onTabChange = { UIStatePreferences.homeScreenTabIndex = it },
-                tabColumnContent = { item ->
-                    item(0, stringResource(R.string.quick_picks), R.drawable.sparkles)
-                    item(1, stringResource(R.string.discover), R.drawable.globe)
-                    item(2, stringResource(R.string.songs), R.drawable.musical_notes)
-                    item(3, stringResource(R.string.playlists), R.drawable.playlist)
-                    item(4, stringResource(R.string.local), R.drawable.download)
-                }
-            ) { currentTabIndex ->
-                saveableStateHolder.SaveableStateProvider(key = currentTabIndex) {
-                    val onSearchClick = { searchRoute("") }
-                    when (currentTabIndex) {
-                        0 -> QuickPicks(
-                            onAlbumClick = { albumRoute(it.key) },
-                            onArtistClick = { artistRoute(it.key) },
-                            onPlaylistClick = {
-                                playlistRoute(
-                                    p0 = it.key,
-                                    p1 = null,
-                                    p2 = null,
-                                    p3 = it.channel?.name == "YouTube Music"
-                                )
-                            },
-                            onSearchClick = onSearchClick
-                        )
-
-                        1 -> HomeDiscovery(
-                            onMoodClick = { mood -> moodRoute(mood.toUiMood()) },
-                            onNewReleaseAlbumClick = { albumRoute(it) },
-                            onSearchClick = onSearchClick,
-                            onMoreMoodsClick = { moreMoodsRoute() },
-                            onMoreAlbumsClick = { moreAlbumsRoute() },
-                            onPlaylistClick = { playlistRoute(it, null, null, true) }
-                        )
-
-                        2 -> HomeSongs(
-                            onSearchClick = onSearchClick
-                        )
-
-                        3 -> HomePlaylists(
-                            onBuiltInPlaylist = { builtInPlaylistRoute(it) },
-                            onPlaylistClick = { localPlaylistRoute(it.id) },
-                            onPipedPlaylistClick = { session, playlist ->
-                                pipedPlaylistRoute(
-                                    p0 = session.apiBaseUrl.toString(),
-                                    p1 = session.token,
-                                    p2 = playlist.id.toString()
-                                )
-                            },
-                            onSearchClick = onSearchClick
-                        )
-
-                        
-
-                   
-
-                        4 -> HomeLocalSongs(
-                            onSearchClick = onSearchClick
-                        )
-                    }
-                }
+                4 -> HomePlaylists(
+                    onBuiltInPlaylist = { playlistIndex -> navController.navigate(route = "builtInPlaylist/$playlistIndex") },
+                    onPlaylistClick = { playlist -> navController.navigate(route = "localPlaylist/${playlist.id}") }
+                )
             }
         }
     }
