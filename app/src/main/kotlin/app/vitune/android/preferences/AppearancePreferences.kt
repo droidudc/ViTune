@@ -31,7 +31,7 @@ object AppearancePreferences : GlobalPreferencesHolder() {
             ColorPaletteName.AMOLED -> Darkness.AMOLED
         }
     )
-    var thumbnailRoundness by enum(ThumbnailRoundness.Medium)
+    var thumbnailRoundness by enum(ThumbnailRoundness.Heaviest)
     var fontFamily by enum(BuiltInFontFamily.Poppins)
     var applyFontPadding by boolean(false)
     val isShowingThumbnailInLockscreenProperty = boolean(true)
