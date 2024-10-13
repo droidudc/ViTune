@@ -49,66 +49,6 @@ fun HomeScreen(
         Screen.Songs,
         Screen.Artists,
         Screen.Albums,
-        Screen.Playlists
+        Screen.Playlists,
     )
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(text = stringResource(id = screens[screenIndex].resourceId))
-                },
-                actions = {
-                    TooltipIconButton(
-                        description = R.string.search,
-                        onClick = { navController.navigate(route = "search") },
-                        icon = Icons.Outlined.Search,
-                        inTopBar = true
-                    )
-
-                    TooltipIconButton(
-                        description = R.string.settings,
-                        onClick = { navController.navigate(route = "settings") },
-                        icon = Icons.Outlined.Settings,
-                        inTopBar = true
-                    )
-                },
-                scrollBehavior = scrollBehavior
-            )
-        }
-    ) { paddingValues ->
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = paddingValues.calculateTopPadding())
-        ) {
-            when (screenIndex) {
-                0 -> QuickPicks(
-                    onAlbumClick = { browseId -> navController.navigate(route = "album/$browseId") },
-                    onArtistClick = { browseId -> navController.navigate(route = "artist/$browseId") },
-                    onPlaylistClick = { browseId -> navController.navigate(route = "playlist/$browseId") }
-                )
-
-                1 -> HomeSongs(
-                    onGoToAlbum = { browseId -> navController.navigate(route = "album/$browseId") },
-                    onGoToArtist = { browseId -> navController.navigate(route = "artist/$browseId") }
-                )
-
-                2 -> HomeArtistList(
-                    onArtistClick = { artist -> navController.navigate(route = "artist/${artist.id}") }
-                )
-
-                3 -> HomeAlbums(
-                    onAlbumClick = { album -> navController.navigate(route = "album/${album.id}") }
-                )
-
-                4 -> HomePlaylists(
-                    onBuiltInPlaylist = { playlistIndex -> navController.navigate(route = "builtInPlaylist/$playlistIndex") },
-                    onPlaylistClick = { playlist -> navController.navigate(route = "localPlaylist/${playlist.id}") }
-                )
-            }
-        }
-    }
-}
+    
