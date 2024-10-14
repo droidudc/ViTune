@@ -198,6 +198,7 @@ fun About() = SettingsCategoryScreen(
             }
         )
     }
+    /*
 
     SettingsGroup(title = stringResource(R.string.contact)) {
         SettingsEntry(
@@ -222,6 +223,8 @@ fun About() = SettingsCategoryScreen(
             }
         )
     }
+    */
+    
 
     var newVersionDialogOpened by rememberSaveable { mutableStateOf(false) }
 
